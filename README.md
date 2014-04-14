@@ -3,6 +3,8 @@ tweety
 
 Search twitter for stuff
 
+Run it on heroku: http://sheltered-scrubland-1187.herokuapp.com/
+
 Build a node.js application that authenticates a twitter user to the twitter API and then uses the following API calls with a simple interface wrapped around it.
 
 1. Provide a search page that uses the GET search/tweets to search tweets, return the search result to a new page or ajax load them in.
