@@ -106,8 +106,6 @@ app.get('/timeline/:user', isLoggedIn, function(req, res) {
             }
           }
         }
-        console.log(coordinates);
-        console.log(tweet_texts.length);
         res.render('index', 
           { tweets: tweets,
             tweet_locations: JSON.stringify({coordinates: coordinates, tweet_texts:tweet_texts}),
@@ -147,7 +145,6 @@ app.get('/auth/twitter/callback', function(req, res, next) {
     } else {
       req.session.oauth.access_token = oauth_access_token;
       req.session.oauth.access_token_secret = oauth_access_token_secret;
-      console.log(results, req.session.oauth);
       res.send("Authentication Successful");
       res.redirect('/');  //You might actually want to redirect!
     }
