@@ -91,11 +91,23 @@ app.get('/timeline/:user', isLoggedIn, function(req, res) {
         
         for (i in tweets) {
           if (tweets[i].place) {
-            tweet_texts.push(tweets[i].text);
-            coordinates.push(tweets[i].place.bounding_box.coordinates[0][0]);
+            var coord = tweets[i].place.bounding_box.coordinates[0][0];
+            var index = -1;
+            for (j in coordinates) {
+              if (coord[0] == coordinates[j][0] && coord[1] == coordinates[j][1]) {
+                index = j;
+              } 
+            }
+            if (index >= 0) {
+              tweet_texts[index].push(tweets[i].text);
+            } else {
+              coordinates.push(coord);
+              tweet_texts.push(new Array(tweets[i].text));
+            }
           }
         }
-        
+        console.log(coordinates);
+        console.log(tweet_texts.length);
         res.render('index', 
           { tweets: tweets,
             tweet_locations: JSON.stringify({coordinates: coordinates, tweet_texts:tweet_texts}),

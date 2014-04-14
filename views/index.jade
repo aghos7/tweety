@@ -65,7 +65,11 @@ html
             });
             bounds.extend(marker.position);
             google.maps.event.addListener(marker, 'click', function() {
-              info_window.setContent(tweet_locations.tweet_texts[this.marker_index]);
+              var content = "";
+              for(i in tweet_locations.tweet_texts[this.marker_index]) {
+                content += tweet_locations.tweet_texts[this.marker_index][i] + "<br />";
+              }
+              info_window.setContent(content);
               info_window.open(map, this);
             });
             markers.push(marker);
