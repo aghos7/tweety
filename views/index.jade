@@ -21,8 +21,10 @@ html
           if (loggedIn)
             form(name="search-users", action="/search/user", method="get").navbar-form.navbar-right
               input(type="text", name="username", placeholder="User Search...").form-control
+              input.btn(type="submit", value="Search")
             form(name="search-tweets", action="/search", method="get").navbar-form.navbar-right
               input(type="text", name="q", value=q?q:"", placeholder="Tweet Search...").form-control
+              input.btn(type="submit", value="Search")
             
     .container-fluid
       if (tweets)
