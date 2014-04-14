@@ -10,11 +10,14 @@ var logfmt = require("logfmt");
 
 var site = "http://127.0.0.1:3000";
 if (process.env.NODE_ENV == "production") {
-  site = "http://vast-fjord-1071.herokuapp.com";
+  site = "http://sheltered-scrubland-1187.herokuapp.com";
 }
 
 var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY || "<insert consumer key here>";
 var TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET || "<insert consumer secret here>";
+var twitterSearchTweetsUrl = "https://api.twitter.com/1.1/search/tweets.json";
+var twitterTimelineUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+var twitterAuthenticateUrl = "https://twitter.com/oauth/authenticate";
 
 var app = express();
 app.set('views', __dirname + '/views');
@@ -44,7 +47,6 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-var twitterSearchTweetsUrl = "https://api.twitter.com/1.1/search/tweets.json";
 app.get('/search', isLoggedIn, function(req, res) {
   var reqUrl = twitterSearchTweetsUrl + "?q=" + req.query.q;
   reqUrl += "&result_type=mixed";
@@ -72,7 +74,6 @@ app.get('/search/user', isLoggedIn, function(req, res) {
   }
 });
 
-var twitterTimelineUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json";
 app.get('/timeline/:user', isLoggedIn, function(req, res) {
   var reqUrl = twitterTimelineUrl + "?screen_name=" + req.params.user;
   reqUrl += "&count=200";
@@ -105,7 +106,6 @@ app.get('/timeline/:user', isLoggedIn, function(req, res) {
     });
 });
 
-var twitterAuthenticateUrl = "https://twitter.com/oauth/authenticate";
 app.get('/auth/twitter', function(req, res) {
   oauth.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
     if (error) {
