@@ -49,7 +49,7 @@ html
   script.
       function initialize() {
         var tweet_locations = !{tweet_locations?tweet_locations:"[]"};
-        var mapOptions = { center: new google.maps.LatLng(45.002666,-93.24879), zoom: 15 };
+        var mapOptions = { center: new google.maps.LatLng(34.149114, -118.337540), zoom: 15 };
         var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         
         if (tweet_locations.coordinates && tweet_locations.coordinates.length) {
@@ -79,13 +79,13 @@ html
           map.fitBounds(bounds);
         } else {
           var infowindow = new google.maps.InfoWindow({
-              content: 'SportsNgin!!'
+              content: 'Where tweety bird lives!!'
           });
         
           var marker = new google.maps.Marker({
-              position: new google.maps.LatLng(45.002666,-93.24879),
+              position: new google.maps.LatLng(34.149114, -118.337540),
               map: map,
-              title: 'SportsNgin!!'
+              title: 'Warner Bros. Studio'
           });
           google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map,marker);
